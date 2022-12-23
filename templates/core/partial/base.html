@@ -13,10 +13,12 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/imgs/theme/favicon.svg' %}" />
     <!-- Template CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/plugins/slider-range.css' %}" />
     <link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body>
@@ -295,7 +297,11 @@
                                             <li><a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My Voucher</a></li>
                                             <li><a href="shop-wishlist.html"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a></li>
                                             <li><a href="page-account.html"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a></li>
-                                            <li><a href="page-login.html"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a></li>
+                                            {% if request.user.is_authenticated %}
+                                            <li><a href="{% url 'userauth:sign-out' %}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a></li>
+                                            {% else %}
+                                            <li><a href="{% url 'userauth:sign-in' %}"><i class="fi fi-rs-sign-in mr-10"></i>Log in</a></li>
+                                            {% endif %}
                                         </ul>
                                     </div>
                                 </div>
@@ -606,6 +612,18 @@
                         </div>
                     </div>
                 </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}">
+                            <strong>{{message}}</strong>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <script>
+                    setTimeout (() => {
+                        $(".alert").alert("close")
+                    }, 3000)
+                </script>
             </div>
         </div>
     </header>
@@ -773,7 +791,11 @@
                         <a href="page-contact.html"><i class="fi-rs-marker"></i> Our location </a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="page-login.html"><i class="fi-rs-user"></i>Log In / Sign Up </a>
+                        {% if user.authenticated %}
+                            <a href="{% url 'userauth:sign-in' %}"><i class="fi-rs-user"></i>Log In / Sign Up </a>
+                            {% else %}
+                            <a href="{% url 'userauth:sign-out' %}"><i class="fi-rs-user"></i>Sign-out</a>
+                            {% endif %}
                     </div>
                     <div class="single-mobile-header-info">
                         <a href="#"><i class="fi-rs-headphones"></i>(+01) - 2345 - 6789 </a>
@@ -1034,8 +1056,8 @@
     <script src="{% static 'assets/js/plugins/jquery.theia.sticky.js' %}"></script>
     <script src="{% static 'assets/js/plugins/jquery.elevatezoom.js' %}"></script>
     <!-- Template  JS -->
-    <script src="{% static './assets/js/main.js' %}"></script>
-    <script src="{% static './assets/js/shop.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/shop.js' %}"></script>
 </body>
 
 </html>
