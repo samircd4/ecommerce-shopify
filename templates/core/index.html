@@ -99,7 +99,7 @@
                                                     <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                                                 </div>
                                                 <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="hot">{{ product.get_parcentage|floatformat:0 }}%</span>
+                                                    <span class="hot">{{ product.get_parcentage|floatformat:0 }}% Discount</span>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap">
@@ -3003,21 +3003,11 @@
                     <div class="sidebar-widget widget-category-2 mb-30">
                         <h5 class="section-title style-1 mb-30">Category</h5>
                         <ul>
+                            {% for category in categories %}
                             <li>
-                                <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-1.svg' %}" alt="" />Milks & Dairies</a><span class="count">30</span>
+                                <a href="{% url 'core:product-list-cat-wise' category.cid %}"> <img src="{{ category.image.url }}" alt="" />{{ category.title }}</a><span class="count">{{ product_cat.count }}</span>
                             </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-2.svg' %}" alt="" />Clothing</a><span class="count">35</span>
-                            </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-3.svg' %}" alt="" />Pet Foods </a><span class="count">42</span>
-                            </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-4.svg' %}" alt="" />Baking material</a><span class="count">68</span>
-                            </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-5.svg' %}" alt="" />Fresh Fruit</a><span class="count">87</span>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <!-- Fillter By Price -->
@@ -3484,4 +3474,4 @@
         </section>
         <!--End 4 columns-->
     </main>
-    {% endblock content %}
+{% endblock content %}
