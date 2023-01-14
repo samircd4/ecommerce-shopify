@@ -44,7 +44,7 @@
                         <div class="shop-product-fillter mb-50 pr-30">
                             <div class="totall-product">
                                 <h2>
-                                    <img class="w-36px mr-10" src="assets/imgs/theme/icons/category-1.svg" alt="" />
+                                    <img class="w-36px mr-10" src="{% static 'assets/imgs/theme/icons/category-1.svg' %}" alt="" />
                                     {{categories.count}} Categories
                                 </h2>
                             </div>
@@ -155,77 +155,43 @@
                             </div>
                             <!-- Product sidebar Widget -->
                             <div class="sidebar-widget product-sidebar mb-50 p-30 bg-grey border-radius-10">
-                                <h5 class="section-title style-1 mb-30">Trending Now</h5>
+                                <h5 class="section-title style-1 mb-30">Best Seller</h5>
+                                {% for product in products %}
                                 <div class="single-post clearfix">
                                     <div class="image">
-                                        <img src="{% static 'assets/imgs/shop/thumbnail-3.jpg' %}" alt="#" />
+                                        <img src="{{ product.image.url }}" alt="#" />
                                     </div>
                                     <div class="content pt-10">
-                                        <h5><a href="shop-product-detail.html">Chen Cardigan</a></h5>
-                                        <p class="price mb-0 mt-5">$99.50</p>
+                                        <h5><a href="shop-product-detail.html">{{ product.title }}</a></h5>
+                                        <p class="price mb-0 mt-5">${{ product.price }}</p>
                                         <div class="product-rate">
                                             <div class="product-rating" style="width: 90%"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="single-post clearfix">
-                                    <div class="image">
-                                        <img src="{% static 'assets/imgs/shop/thumbnail-4.jpg' %}" alt="#" />
-                                    </div>
-                                    <div class="content pt-10">
-                                        <h6><a href="shop-product-detail.html">Chen Sweater</a></h6>
-                                        <p class="price mb-0 mt-5">$89.50</p>
-                                        <div class="product-rate">
-                                            <div class="product-rating" style="width: 80%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="single-post clearfix">
-                                    <div class="image">
-                                        <img src="assets/imgs/shop/thumbnail-5.jpg" alt="#" />
-                                    </div>
-                                    <div class="content pt-10">
-                                        <h6><a href="shop-product-detail.html">Colorful Jacket</a></h6>
-                                        <p class="price mb-0 mt-5">$25</p>
-                                        <div class="product-rate">
-                                            <div class="product-rating" style="width: 60%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="single-post clearfix">
-                                    <div class="image">
-                                        <img src="assets/imgs/shop/thumbnail-6.jpg" alt="#" />
-                                    </div>
-                                    <div class="content pt-10">
-                                        <h6><a href="shop-product-detail.html">Lorem, ipsum</a></h6>
-                                        <p class="price mb-0 mt-5">$25</p>
-                                        <div class="product-rate">
-                                            <div class="product-rating" style="width: 60%"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             </div>
                             <div class="sidebar-widget widget_instagram mb-50">
                                 <h5 class="section-title style-1 mb-30">Gallery</h5>
                                 <div class="instagram-gellay">
                                     <ul class="insta-feed">
                                         <li>
-                                            <a href="#"><img class="border-radius-5" src="assets/imgs/shop/thumbnail-1.jpg" alt="" /></a>
+                                            <a href="#"><img class="border-radius-5" src="{% static 'assets/imgs/shop/thumbnail-1.jpg' %}" alt="" /></a>
                                         </li>
                                         <li>
-                                            <a href="#"><img class="border-radius-5" src="assets/imgs/shop/thumbnail-2.jpg" alt="" /></a>
+                                            <a href="#"><img class="border-radius-5" src="{% static 'assets/imgs/shop/thumbnail-2.jpg' %}" alt="" /></a>
                                         </li>
                                         <li>
-                                            <a href="#"><img class="border-radius-5" src="assets/imgs/shop/thumbnail-3.jpg" alt="" /></a>
+                                            <a href="#"><img class="border-radius-5" src="{% static 'assets/imgs/shop/thumbnail-3.jpg' %}" alt="" /></a>
                                         </li>
                                         <li>
-                                            <a href="#"><img class="border-radius-5" src="assets/imgs/shop/thumbnail-4.jpg" alt="" /></a>
+                                            <a href="#"><img class="border-radius-5" src="{% static 'assets/imgs/shop/thumbnail-4.jpg' %}" alt="" /></a>
                                         </li>
                                         <li>
-                                            <a href="#"><img class="border-radius-5" src="assets/imgs/shop/thumbnail-5.jpg" alt="" /></a>
+                                            <a href="#"><img class="border-radius-5" src="{% static 'assets/imgs/shop/thumbnail-5.jpg' %}" alt="" /></a>
                                         </li>
                                         <li>
-                                            <a href="#"><img class="border-radius-5" src="assets/imgs/shop/thumbnail-6.jpg" alt="" /></a>
+                                            <a href="#"><img class="border-radius-5" src="{% static 'assets/imgs/shop/thumbnail-6.jpg' %}" alt="" /></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -255,7 +221,7 @@
                                 </ul>
                             </div>
                             <div class="banner-img wow fadeIn mb-50 animated d-lg-block d-none">
-                                <img src="assets/imgs/banner/banner-11.png" alt="" />
+                                <img src="{% static 'assets/imgs/banner/banner-11.png' %}" alt="" />
                                 <div class="banner-text">
                                     <span>Oganic</span>
                                     <h4>

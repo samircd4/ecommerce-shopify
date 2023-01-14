@@ -89,8 +89,8 @@
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="shop-product-right.html">
-                                                        <img class="default-img" src="{{product.image.url}}" alt="" />
-                                                        <img class="hover-img" src="{{product.image.url}}" alt="" />
+                                                        <img class="default-img img_img" src="{{product.image.url}}" alt="" />
+                                                        <img class="hover-img img_img" src="{{product.image.url}}" alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">
@@ -104,7 +104,7 @@
                                             </div>
                                             <div class="product-content-wrap">
                                                 <div class="product-category">
-                                                    <a href="shop-grid-right.html">Snack</a>
+                                                    <a href="shop-grid-right.html">{{ product.category }}</a>
                                                 </div>
                                                 <h2><a href="shop-product-right.html">{{product.title}}</a></h2>
                                                 <div class="product-rate-cover">
@@ -3005,7 +3005,7 @@
                         <ul>
                             {% for category in categories %}
                             <li>
-                                <a href="{% url 'core:product-list-cat-wise' category.cid %}"> <img src="{{ category.image.url }}" alt="" />{{ category.title }}</a><span class="count">{{ product_cat.count }}</span>
+                                <a href="{% url 'core:product-list-cat-wise' category.cid %}"> <img src="{{ category.image.url }}" alt="" />{{ category.title }}</a><span class="count">{{ category.category.count }}</span>
                             </li>
                             {% endfor %}
                         </ul>

@@ -55,13 +55,14 @@ class Vendor(models.Model):
     description = models.TextField(null=True, blank=True, default='I am an ammezing vendor')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     
-    Address = models.CharField(max_length=100, default='Bottrish, Kishoreganj')
+    address = models.CharField(max_length=100, default='Bottrish, Kishoreganj')
     contact = models.CharField(max_length=100, default='+880 1781 355 377')
     chat_res_time = models.CharField(max_length=100, default='100')
     shipping_on_time = models.CharField(max_length=100, default='100')
     authenticate_rating = models.CharField(max_length=100, default='100')
     days_return = models.CharField(max_length=100, default='100')
     warranty_period = models.CharField(max_length=100, default='100')
+    joined = models.DateField(auto_now_add=True, null= True, blank=True)
     
     class Meta:
         verbose_name = 'Vendor'

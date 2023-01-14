@@ -12,7 +12,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'category_image']
 
 class VendorAdmin(admin.ModelAdmin):
-    list_display = ['title', 'vendor_image']
+    list_display = ['title','address', 'joined','contact', 'vendor_image']
 
 class CartOrderAdmin(admin.ModelAdmin):
     list_display = ['user', 'price', 'paid_status', 'order_date', 'product_status']

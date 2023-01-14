@@ -20,9 +20,11 @@ def product_list_view(request):
 
 def category_list_view(request):
     categories = Category.objects.all()
+    products = Product.objects.filter(product_status= 'published')[:4]
 
     context = {
-        "categories":categories
+        "categories":categories,
+        'products': products,
     }
     return render(request, 'core/category-list.html', context)
 
@@ -35,3 +37,10 @@ def product_cat_wise(request, cid):
         'products': products
     }
     return render(request, 'core/product-category-list.html', context)
+
+def vendor_list(request):
+    vendors = Vendor.objects.all()
+    context = {
+        'vendors': vendors,
+    }
+    return render(request, 'core/vendors-list.html', context)
