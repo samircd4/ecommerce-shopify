@@ -3,7 +3,7 @@ from core.models import Product, Category, Tags, Vendor, CartOrder, CartOrderIte
 
 
 def index(request):
-    products = Product.objects.filter(product_status='published').order_by('-id')
+    products = Product.objects.filter(product_status='published', status=True).order_by('-id')
     categories = Category.objects.all()
     context = {
         'products': products,
@@ -12,7 +12,7 @@ def index(request):
     return render(request, 'core/index.html', context)
 
 def product_list_view(request):
-    products = Product.objects.filter(product_status= 'published')
+    products = Product.objects.filter(product_status= 'published', status=True)
     
     context = {'products': products}
     
@@ -20,7 +20,7 @@ def product_list_view(request):
 
 def category_list_view(request):
     categories = Category.objects.all()
-    products = Product.objects.filter(product_status= 'published')[:4]
+    products = Product.objects.filter(product_status= 'published', status=True)[:4]
 
     context = {
         "categories":categories,
@@ -30,7 +30,7 @@ def category_list_view(request):
 
 def product_cat_wise(request, cid):
     category = Category.objects.get(cid=cid)
-    products = Product.objects.filter( product_status='published', category=category)
+    products = Product.objects.filter( product_status='published', category=category, status=True)
     
     context = {
         'category': category,
@@ -44,3 +44,25 @@ def vendor_list(request):
         'vendors': vendors,
     }
     return render(request, 'core/vendors-list.html', context)
+
+def vendor_details(request, vid):
+    vendor = Vendor.objects.get(vid=vid)
+    products = Product.objects.filter(vendor=vendor,product_status='published', status=True)
+    categories = Category.objects.all()
+    contex = {
+        'vendor': vendor,
+        'products': products,
+        'categories': categories,
+    }
+    return render(request, 'core/vendor-details.html', contex)
+
+def product_details(request, pid):
+    product = Product.objects.get(pid=pid)
+    p_images = product.p_images.all()
+    categories = Category.objects.all()
+    context = {
+        'product': product,
+        'p_images': p_images,
+        'categories': categories,
+    }
+    return render(request, 'core/product-details.html', context)

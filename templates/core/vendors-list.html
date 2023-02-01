@@ -87,12 +87,12 @@
                             </div>
                             <div class="vendor-img-action-wrap">
                                 <div class="vendor-img">
-                                    <a href="vendor-details-1.html">
+                                    <a href="{% url 'core:vendor-details' vendor.vid %}" >
                                         <img class="default-img" src="{{ vendor.image.url }}" alt="" />
                                     </a>
                                 </div>
                                 <div class="mt-10">
-                                    <span class="font-small total-product">233 products</span>
+                                    <span class="font-small total-product">{{ vendor.vendor.all.count }} product{{vendor.vendor.all|pluralize}}</span>
                                 </div>
                             </div>
                             <div class="vendor-content-wrap">
@@ -100,7 +100,7 @@
                                     <div class="product-category">
                                         <span class="text-muted">Since {{ vendor.joined }}</span>
                                     </div>
-                                    <h4 class="mb-5"><a href="vendor-details-1.html">{{ vendor.title }}</a></h4>
+                                    <h4 class="mb-5"><a href="{% url 'core:vendor-details' vendor.vid %}">{{ vendor.title }}</a></h4>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
@@ -117,7 +117,7 @@
                                 
                             </div>
                             <div class="visit_store_2">
-                                <a href="vendor-details-1.html" class="btn btn-xs visit_store">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
+                                <a href="{% url 'core:vendor-details' vendor.vid %}" class="btn btn-xs visit_store">Visit Store <i class="fi-rs-arrow-small-right"></i></a>
                             </div>
                         </div>
                     </div>

@@ -12,4 +12,7 @@ urlpatterns = [
     path('category/<cid>/', product_cat_wise, name='product-list-cat-wise'),
     # Vendor
     path('vendors', vendor_list, name='vendors-list'),
+    path('vendor/<vid>/', vendor_details, name='vendor-details'),
+    # Product
+    path('product/<pid>/', product_details, name='product-details'),
 ]

@@ -48,7 +48,7 @@ class Tags(models.Model):
     pass
     
 class Vendor(models.Model):
-    cid = ShortUUIDField(unique=True, length=10, max_length=20, prefix='ven', alphabet='abcdefghijklmnop1234567890')
+    vid = ShortUUIDField(unique=True, length=10, max_length=20, prefix='ven', alphabet='abcdefghijklmnop1234567890')
     
     title = models.CharField(max_length=100, default = 'I am a vendor')
     image = models.ImageField(upload_to=user_directory_path, default='vendor.jpg')
@@ -78,7 +78,7 @@ class Product(models.Model):
     pid = ShortUUIDField(unique=True, length=10, max_length=20, prefix='prd', alphabet='abcdefghijklmnop1234567890')
     
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True, related_name='vendor')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='category')
     
     title = models.CharField(max_length=100, default = 'I am a product')
@@ -118,7 +118,7 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='product-images', default='product.jpg')
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, related_name='p_images' ,on_delete=models.SET_NULL, null=True)
     date = models.DateTimeField(auto_now_add=True)
     
     class Meta:

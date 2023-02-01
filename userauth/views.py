@@ -45,7 +45,7 @@ def login_view(request):
                 messages.success(request, 'You are logged in')
                 return redirect('core:home')
             else:
-                messages.warning(request, 'User dose not exist! Please create an account')
+                messages.warning(request, 'Email or password wrong! Please enter valid email and password')
         except:
             messages.warning(request, f'User with {email} dose not exist')
             
