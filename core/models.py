@@ -89,6 +89,10 @@ class Product(models.Model):
     old_price = models.DecimalField(max_digits=9999, decimal_places=2, default=120)
     
     spacifications = models.TextField(null=True, blank=True)
+    type = models.CharField(max_length=100, default = 'Organic')
+    stock_count = models.CharField(max_length=100, default = '10')
+    life = models.CharField(max_length=100, default = '100 Days')
+    mfd = models.DateTimeField(auto_now_add=False, null=True, blank=True)
     # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
     
     product_status = models.CharField(choices=STATUS, max_length=20, default="in-review")
@@ -194,7 +198,7 @@ class Wishlist(models.Model):
 
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    address = models.CharField(max_length=200, null=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
     status = models.BooleanField(default=False)
     
     class Meta:

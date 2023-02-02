@@ -60,9 +60,16 @@ def product_details(request, pid):
     product = Product.objects.get(pid=pid)
     p_images = product.p_images.all()
     categories = Category.objects.all()
+    try:
+        address = Address.objects.get(user = request.user)
+    except:
+        address = 'Address not found'
+    products = Product.objects.filter(category = product.category).exclude(pid=pid)[:4]
     context = {
         'product': product,
         'p_images': p_images,
         'categories': categories,
+        'address': address,
+        'products': products,
     }
     return render(request, 'core/product-details.html', context)

@@ -64,7 +64,7 @@
                                                 </div>
                                             </div>
                                             <div class="short-desc mb-30">
-                                                <p class="font-lg">{{ product.description }}</p>
+                                                <p class="font-lg">{{ product.description|truncatechars:100 }}</p>
                                             </div>
                                             <div class="attr-detail attr-size mb-30">
                                                 <strong class="mr-10">Size / Weight: </strong>
@@ -90,14 +90,14 @@
                                             </div>
                                             <div class="font-xs">
                                                 <ul class="mr-50 float-start">
-                                                    <li class="mb-5">Type: <span class="text-brand">Organic</span></li>
-                                                    <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2022</span></li>
-                                                    <li>LIFE: <span class="text-brand">70 days</span></li>
+                                                    <li class="mb-5">Type: <span class="text-brand">{{ product.type }}</span></li>
+                                                    <li class="mb-5">MFG:  <span class="text-brand">{{ product.mfd|date:"d M Y" }}</span></li>
+                                                    <li>LIFE: <span class="text-brand">{{ product.life }}</span></li>
                                                 </ul>
                                                 <ul class="float-start">
-                                                    <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
+                                                    <li class="mb-5">SKU: <a href="#">{{ product.sku }}</a></li>
                                                     <li class="mb-5">Tags: <a href="#" rel="tag">Snack</a>, <a href="#" rel="tag">Organic</a>, <a href="#" rel="tag">Brown</a></li>
-                                                    <li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span></li>
+                                                    <li>Stock:<span class="in-stock text-brand ml-5">{{ product.stock_count }} Item{{ product.stock_count|pluralize }} In Stock</span></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -122,44 +122,10 @@
                                         </ul>
                                         <div class="tab-content shop_info_tab entry-main-content">
                                             <div class="tab-pane fade show active" id="Description">
-                                                <div class="">
-                                                    <p>Uninhibited carnally hired played in whimpered dear gorilla koala depending and much yikes off far quetzal goodness and from for grimaced goodness unaccountably and meadowlark near unblushingly crucial
-                                                        scallop tightly neurotic hungrily some and dear furiously this apart.</p>
-                                                    <p>Spluttered narrowly yikes left moth in yikes bowed this that grizzly much hello on spoon-fed that alas rethought much decently richly and wow against the frequent fluidly at formidable acceptably flapped
-                                                        besides and much circa far over the bucolically hey precarious goldfinch mastodon goodness gnashed a jellyfish and one however because.</p>
-                                                    <ul class="product-more-infor mt-30">
-                                                        <li><span>Type Of Packing</span> Bottle</li>
-                                                        <li><span>Color</span> Green, Pink, Powder Blue, Purple</li>
-                                                        <li><span>Quantity Per Case</span> 100ml</li>
-                                                        <li><span>Ethyl Alcohol</span> 70%</li>
-                                                        <li><span>Piece In One</span> Carton</li>
-                                                    </ul>
-                                                    <hr class="wp-block-separator is-style-dots" />
-                                                    <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey hello far meadowlark imitatively egregiously hugged that yikes minimally unanimous pouted flirtatiously as beaver beheld above forward
-                                                        energetic across this jeepers beneficently cockily less a the raucously that magic upheld far so the this where crud then below after jeez enchanting drunkenly more much wow callously irrespective
-                                                        limpet.</p>
-                                                    <h4 class="mt-30">Packaging & Delivery</h4>
-                                                    <hr class="wp-block-separator is-style-wide" />
-                                                    <p>Less lion goodness that euphemistically robin expeditiously bluebird smugly scratched far while thus cackled sheepishly rigid after due one assenting regarding censorious while occasional or this more
-                                                        crane went more as this less much amid overhung anathematic because much held one exuberantly sheep goodness so where rat wry well concomitantly.</p>
-                                                    <p>Scallop or far crud plain remarkably far by thus far iguana lewd precociously and and less rattlesnake contrary caustic wow this near alas and next and pled the yikes articulate about as less cackled
-                                                        dalmatian in much less well jeering for the thanks blindly sentimental whimpered less across objectively fanciful grimaced wildly some wow and rose jeepers outgrew lugubrious luridly irrationally
-                                                        attractively dachshund.</p>
-                                                    <h4 class="mt-30">Suggested Use</h4>
-                                                    <ul class="product-more-infor mt-30">
-                                                        <li>Refrigeration not necessary.</li>
-                                                        <li>Stir before serving</li>
-                                                    </ul>
-                                                    <h4 class="mt-30">Other Ingredients</h4>
-                                                    <ul class="product-more-infor mt-30">
-                                                        <li>Organic raw pecans, organic raw cashews.</li>
-                                                        <li>This butter was produced using a LTG (Low Temperature Grinding) process</li>
-                                                        <li>Made in machinery that processes tree nuts but does not process peanuts, gluten, dairy or soy</li>
-                                                    </ul>
-                                                    <h4 class="mt-30">Warnings</h4>
-                                                    <ul class="product-more-infor mt-30">
-                                                        <li>Oil separation occurs naturally. May contain pieces of shell.</li>
-                                                    </ul>
+                                                <div class="description">
+                                                    <p>
+                                                        {{ product.description }}
+                                                    </p>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="Additional-info">
@@ -254,7 +220,7 @@
                                             </div>
                                             <div class="tab-pane fade" id="Vendor-info">
                                                 <div class="vendor-logo d-flex mb-30">
-                                                    <img src="{% static 'assets/imgs/vendor/vendor-18.svg' %}" alt="" />
+                                                    <img src="{{ product.vendor.image.url }}" alt="" />
                                                     <div class="vendor-name ml-15">
                                                         <h6>
                                                             <a href="{% url 'core:vendor-details' product.vendor.vid %}">{{ product.vendor.title }}</a>
@@ -299,7 +265,7 @@
                                                                 <div class="single-comment justify-content-between d-flex mb-30">
                                                                     <div class="user justify-content-between d-flex">
                                                                         <div class="thumb text-center">
-                                                                            <img src="{% static 'assets/imgs/blog/author-2.png' %}" alt="" />
+                                                                            <img src="{% static 'assets/imgs/blog/default_user.png' %}" alt="" />
                                                                             <a href="#" class="font-heading text-brand">Sienna</a>
                                                                         </div>
                                                                         <div class="desc">
@@ -319,7 +285,7 @@
                                                                 <div class="single-comment justify-content-between d-flex mb-30 ml-30">
                                                                     <div class="user justify-content-between d-flex">
                                                                         <div class="thumb text-center">
-                                                                            <img src="{% static 'assets/imgs/blog/author-3.png' %}" alt="" />
+                                                                            <img src="{% static 'assets/imgs/blog/default_user.png' %}" alt="" />
                                                                             <a href="#" class="font-heading text-brand">Brenna</a>
                                                                         </div>
                                                                         <div class="desc">
@@ -327,9 +293,9 @@
                                                                                 <div class="d-flex align-items-center">
                                                                                     <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
                                                                                 </div>
-                                                                                <div class="product-rate d-inline-block">
+                                                                                {% comment %} <div class="product-rate d-inline-block">
                                                                                     <div class="product-rating" style="width: 80%"></div>
-                                                                                </div>
+                                                                                </div> {% endcomment %}
                                                                             </div>
                                                                             <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos
                                                                                 sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
@@ -339,7 +305,7 @@
                                                                 <div class="single-comment justify-content-between d-flex">
                                                                     <div class="user justify-content-between d-flex">
                                                                         <div class="thumb text-center">
-                                                                            <img src="{% static 'assets/imgs/blog/author-4.png' %}" alt="" />
+                                                                            <img src="{% static 'assets/imgs/blog/default_user.png' %}" alt="" />
                                                                             <a href="#" class="font-heading text-brand">Gemma</a>
                                                                         </div>
                                                                         <div class="desc">
@@ -431,18 +397,21 @@
                                     </div>
                                 </div>
                                 <div class="row mt-60">
+                                    {% if products %}
                                     <div class="col-12">
                                         <h2 class="section-title style-1 mb-30">Related products</h2>
                                     </div>
+                                    {% endif %}
                                     <div class="col-12">
                                         <div class="row related-products">
+                                            {% for p in products %}
                                             <div class="col-lg-3 col-md-4 col-12 col-sm-6">
                                                 <div class="product-cart-wrap hover-up">
                                                     <div class="product-img-action-wrap">
                                                         <div class="product-img product-img-zoom">
-                                                            <a href="shop-product-right.html" tabindex="0">
-                                                                <img class="default-img" src="{% static 'assets/imgs/shop/product-2-1.jpg' %}" alt="" />
-                                                                <img class="hover-img" src="{% static 'assets/imgs/shop/product-2-2.jpg' %}" alt="" />
+                                                            <a href="{% url 'core:product-details' p.pid %}" tabindex="0">
+                                                                <img class="default-img" src="{{ p.image.url }}" alt="" />
+                                                                <img class="hover-img" src="{{ p.image.url }}" alt="" />
                                                             </a>
                                                         </div>
                                                         <div class="product-action-1">
@@ -455,107 +424,18 @@
                                                         </div>
                                                     </div>
                                                     <div class="product-content-wrap">
-                                                        <h2><a href="shop-product-right.html" tabindex="0">Ulstra Bass Headphone</a></h2>
+                                                        <h2><a href="{% url 'core:product-details' p.pid %}" tabindex="0">{{ p.title }}</a></h2>
                                                         <div class="rating-result" title="90%">
                                                             <span> </span>
                                                         </div>
                                                         <div class="product-price">
-                                                            <span>$238.85 </span>
-                                                            <span class="old-price">$245.8</span>
+                                                            <span>${{ p.price }} </span>
+                                                            <span class="old-price">${{ p.old_price }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                                <div class="product-cart-wrap hover-up">
-                                                    <div class="product-img-action-wrap">
-                                                        <div class="product-img product-img-zoom">
-                                                            <a href="shop-product-right.html" tabindex="0">
-                                                                <img class="default-img" src="{% static 'assets/imgs/shop/product-3-1.jpg' %}" alt="" />
-                                                                <img class="hover-img" src="{% static 'assets/imgs/shop/product-4-2.jpg' %}" alt="" />
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-1">
-                                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                                        </div>
-                                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                                            <span class="sale">-12%</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-content-wrap">
-                                                        <h2><a href="shop-product-right.html" tabindex="0">Smart Bluetooth Speaker</a></h2>
-                                                        <div class="rating-result" title="90%">
-                                                            <span> </span>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <span>$138.85 </span>
-                                                            <span class="old-price">$145.8</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                                <div class="product-cart-wrap hover-up">
-                                                    <div class="product-img-action-wrap">
-                                                        <div class="product-img product-img-zoom">
-                                                            <a href="shop-product-right.html" tabindex="0">
-                                                                <img class="default-img" src="{% static 'assets/imgs/shop/product-4-1.jpg' %}" alt="" />
-                                                                <img class="hover-img" src="{% static 'assets/imgs/shop/product-4-2.jpg' %}" alt="" />
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-1">
-                                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                                        </div>
-                                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                                            <span class="new">New</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-content-wrap">
-                                                        <h2><a href="shop-product-right.html" tabindex="0">HomeSpeak 12UEA Goole</a></h2>
-                                                        <div class="rating-result" title="90%">
-                                                            <span> </span>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <span>$738.85 </span>
-                                                            <span class="old-price">$1245.8</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-12 col-sm-6 d-lg-block d-none">
-                                                <div class="product-cart-wrap hover-up mb-0">
-                                                    <div class="product-img-action-wrap">
-                                                        <div class="product-img product-img-zoom">
-                                                            <a href="shop-product-right.html" tabindex="0">
-                                                                <img class="default-img" src="{% static 'assets/imgs/shop/product-5-1.jpg' %}" alt="" />
-                                                                <img class="hover-img" src="{% static 'assets/imgs/shop/product-3-2.jpg' %}" alt="" />
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-1">
-                                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                                        </div>
-                                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                                            <span class="hot">Hot</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-content-wrap">
-                                                        <h2><a href="shop-product-right.html" tabindex="0">Dadua Camera 4K 2022EF</a></h2>
-                                                        <div class="rating-result" title="90%">
-                                                            <span> </span>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <span>$89.8 </span>
-                                                            <span class="old-price">$98.8</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div>
@@ -565,13 +445,25 @@
                             <div class="sidebar-widget widget-delivery mb-30 bg-grey-9 box-shadow-none">
                                 <h5 class="section-title style-3 mb-20">Delivery</h5>
                                 <ul>
+                                    <li class="hr"></li>
                                     <li>
                                         <i class="fi fi-rs-marker mr-10 text-brand"></i>
                                         <span>
-                                            5171 W Campbell Ave <br />
-                                            undefined Kent, Utah 53127 <br />United States
+                                            {{ address.address }}
+                                            <br>
+                                            <br>
+                                            {% if address.status == True %}
+                                            <p class="py-4 fs-5 text-success">
+                                                <a href="#" class="change float-end">Change</a>
+                                                Verified Address <i class="fa-solid fa-circle-check"></i>
+                                            </p>
+                                            {% else %}
+                                            <p class="fs-5 text-danger">
+                                                <a href="#" class="change float-end fs-5">Verify</a>
+                                                Unverified Address <i class="fa-solid fa-circle-xmark"></i>
+                                            </p>
+                                            {% endif %}
                                         </span>
-                                        <a href="#" class="change float-end">Change</a>
                                     </li>
                                     <li class="hr"><span></span></li>
                                 </ul>
@@ -594,15 +486,17 @@
                             <div class="sidebar-widget widget-vendor mb-30 bg-grey-9 box-shadow-none">
                                 <h5 class="section-title style-3 mb-20">Vendor</h5>
                                 <div class="vendor-logo d-flex mb-30">
-                                    <img src="{% static 'assets/imgs/vendor/vendor-18.svg' %}" alt="" />
+                                    <img src="{{ product.vendor.image.url }}" alt="" />
                                     <div class="vendor-name ml-15">
                                         <h6>
                                             <a href="{% url 'core:vendor-details' product.vendor.vid %}">{{ product.vendor.title }}</a>
                                         </h6>
                                         <div class="product-rate-cover text-end">
+                                            <br>
                                             <div class="product-rate d-inline-block">
-                                                <div class="product-rating" style="width: 90%"></div>
+                                                <div class="product-rating" style="width: 60%"></div>
                                             </div>
+                                            <br>
                                             <span class="font-small ml-5 text-muted"> (32 reviews)</span>
                                         </div>
                                     </div>
