@@ -5869,6 +5869,7 @@ table.no-border thead {
 .archive-header {
     border-radius: 20px;
     padding: 70px 80px;
+    background: url(../imgs/blog/header-bg.png) no-repeat center center !important;
     background-size: cover;
 }
 

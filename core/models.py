@@ -2,6 +2,8 @@ from django.db import models
 from shortuuid.django_fields import ShortUUIDField
 from django.utils.html import mark_safe
 from userauth.models import User
+from taggit.managers import TaggableManager
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 STATUS = (
@@ -52,6 +54,7 @@ class Vendor(models.Model):
     
     title = models.CharField(max_length=100, default = 'I am a vendor')
     image = models.ImageField(upload_to=user_directory_path, default='vendor.jpg')
+    # description = models.TextField(null=True, blank=True, default='I am an ammezing vendor')
     description = models.TextField(null=True, blank=True, default='I am an ammezing vendor')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     
@@ -83,12 +86,13 @@ class Product(models.Model):
     
     title = models.CharField(max_length=100, default = 'I am a product')
     image = models.ImageField(upload_to=user_directory_path, default='product.jpg')
-    description = models.TextField(null=True, blank=True, default='I am an ammezing product')
+    description = RichTextUploadingField(null=True, blank=True, default='I am an ammezing product')
     
     price = models.DecimalField(max_digits=9999, decimal_places=2, default=100)
     old_price = models.DecimalField(max_digits=9999, decimal_places=2, default=120)
+    tags = TaggableManager(blank=True)
     
-    spacifications = models.TextField(null=True, blank=True)
+    spacifications = RichTextUploadingField(null=True, blank=True)
     type = models.CharField(max_length=100, default = 'Organic')
     stock_count = models.CharField(max_length=100, default = '10')
     life = models.CharField(max_length=100, default = '100 Days')

@@ -28,6 +28,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Third party 
+    'taggit',
+    'ckeditor',
+    'ckeditor_uploader',
     
     #Custom Apps
     'core',
@@ -191,3 +195,21 @@ JAZZMIN_SETTINGS = {
 
 
 AUTH_USER_MODEL = 'userauth.User'
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono',
+        'toolbar':'all',
+
+        'codeSnippet_theme': 'monokai',
+        'toolbar': 'MyCustomToolbar',
+        'extraPlugins': ','.join(
+            [
+                # add the follow plugins
+                'codesnippet',
+                'widget',
+                'dialog',
+            ]),
+    }
+}

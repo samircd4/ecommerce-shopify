@@ -1,6 +1,11 @@
 {% extends 'core/partial/base.html' %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/monokai.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script> 
+<script>hljs.initHighlightingOnLoad();</script>
+<script src=" {% static 'assets/js/prism.js' %} "></script>
+<link rel="stylesheet" href=" {% static 'assets/css/prism.css' %} ">
 
     <main class="main">
         <div class="page-header breadcrumb-wrap">
@@ -64,7 +69,7 @@
                                                 </div>
                                             </div>
                                             <div class="short-desc mb-30">
-                                                <p class="font-lg">{{ product.description|truncatechars:100 }}</p>
+                                                <p class="font-lg">{{ product.description|safe|truncatechars:100 }}</p>
                                             </div>
                                             <div class="attr-detail attr-size mb-30">
                                                 <strong class="mr-10">Size / Weight: </strong>
@@ -96,7 +101,10 @@
                                                 </ul>
                                                 <ul class="float-start">
                                                     <li class="mb-5">SKU: <a href="#">{{ product.sku }}</a></li>
-                                                    <li class="mb-5">Tags: <a href="#" rel="tag">Snack</a>, <a href="#" rel="tag">Organic</a>, <a href="#" rel="tag">Brown</a></li>
+                                                    <li class="mb-5">Tags: 
+                                                        {% for tag in product.tags.all %}
+                                                        <a href="{% url 'core:tags' tag.slug %}" rel="tag">{{ tag.name }}, </a>
+                                                        {% endfor %} </li>
                                                     <li>Stock:<span class="in-stock text-brand ml-5">{{ product.stock_count }} Item{{ product.stock_count|pluralize }} In Stock</span></li>
                                                 </ul>
                                             </div>
@@ -124,99 +132,12 @@
                                             <div class="tab-pane fade show active" id="Description">
                                                 <div class="description">
                                                     <p>
-                                                        {{ product.description }}
+                                                        {{ product.description|safe }}
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="tab-pane fade" id="Additional-info">
-                                                <table class="font-md">
-                                                    <tbody>
-                                                        <tr class="stand-up">
-                                                            <th>Stand Up</th>
-                                                            <td>
-                                                                <p>35″L x 24″W x 37-45″H(front to back wheel)</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="folded-wo-wheels">
-                                                            <th>Folded (w/o wheels)</th>
-                                                            <td>
-                                                                <p>32.5″L x 18.5″W x 16.5″H</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="folded-w-wheels">
-                                                            <th>Folded (w/ wheels)</th>
-                                                            <td>
-                                                                <p>32.5″L x 24″W x 18.5″H</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="door-pass-through">
-                                                            <th>Door Pass Through</th>
-                                                            <td>
-                                                                <p>24</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="frame">
-                                                            <th>Frame</th>
-                                                            <td>
-                                                                <p>Aluminum</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="weight-wo-wheels">
-                                                            <th>Weight (w/o wheels)</th>
-                                                            <td>
-                                                                <p>20 LBS</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="weight-capacity">
-                                                            <th>Weight Capacity</th>
-                                                            <td>
-                                                                <p>60 LBS</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="width">
-                                                            <th>Width</th>
-                                                            <td>
-                                                                <p>24″</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="handle-height-ground-to-handle">
-                                                            <th>Handle height (ground to handle)</th>
-                                                            <td>
-                                                                <p>37-45″</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="wheels">
-                                                            <th>Wheels</th>
-                                                            <td>
-                                                                <p>12″ air / wide track slick tread</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="seat-back-height">
-                                                            <th>Seat back height</th>
-                                                            <td>
-                                                                <p>21.5″</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="head-room-inside-canopy">
-                                                            <th>Head room (inside canopy)</th>
-                                                            <td>
-                                                                <p>25″</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="pa_color">
-                                                            <th>Color</th>
-                                                            <td>
-                                                                <p>Black, Blue, Red, White</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr class="pa_size">
-                                                            <th>Size</th>
-                                                            <td>
-                                                                <p>M, S</p>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                {{ product.spacifications|safe }}
                                             </div>
                                             <div class="tab-pane fade" id="Vendor-info">
                                                 <div class="vendor-logo d-flex mb-30">
@@ -630,5 +551,4 @@
             </div>
         </div>
     </main>
-
 {% endblock  %}

@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.db.models import Count
+from taggit.models import Tag
 from core.models import Product, Category, Tags, Vendor, CartOrder, CartOrderItems, ProductReview, Address, Wishlist, ProductImage
 
 
@@ -73,3 +75,18 @@ def product_details(request, pid):
         'products': products,
     }
     return render(request, 'core/product-details.html', context)
+
+def tag_list(request, tag_slug=None):
+    products = Product.objects.filter(product_status='published', status=True).order_by('-date')
+    tags = Tag.objects.all()[:5]
+    
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug = tag_slug)
+        products = products.filter(tags__in=[tag])
+    context = {
+        'products': products,
+        'tag': tag,
+        'tags': tags,
+    }
+    return render(request, 'core/tag.html', context)
