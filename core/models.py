@@ -132,7 +132,22 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name_plural = 'Product images'
     
-
+class ProductReview(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name="reviews")
+    review = models.TextField()
+    rating = models.IntegerField(choices=RATING, default=None)
+    date = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        verbose_name_plural = 'Product Reviews'
+    
+    def __str__(self):
+        return self.product.title
+    
+    def get_rating(self):
+        ratings = self.rating*20
+        return ratings
 
 
 class CartOrder(models.Model):
@@ -145,9 +160,6 @@ class CartOrder(models.Model):
     
     class Meta:
         verbose_name_plural = 'Crat Order'
-    
-    # def __str__(self):
-    #     return self.user
     
 
 class CartOrderItems(models.Model):
@@ -169,22 +181,6 @@ class CartOrderItems(models.Model):
     def __str__(self):
         return self.order
     
-
-class ProductReview(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name="reviews")
-    review = models.TextField()
-    rating = models.IntegerField(choices=RATING, default=None)
-    date = models.DateTimeField(auto_now_add=True)
-    
-    class Meta:
-        verbose_name_plural = 'Product Reviews'
-    
-    def __str__(self):
-        return self.product.title
-    
-    def get_rating(self):
-        return self.rating
 
 class Wishlist(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)

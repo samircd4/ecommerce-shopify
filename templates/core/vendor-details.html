@@ -153,7 +153,7 @@
                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     <span class="ml-30">500g</span>
                                 </div>
-                                <p class="mt-15 mb-15">{{ product.description }}</p>
+                                <p class="mt-15 mb-15">{{ product.description|safe|truncatechars:100 }}</p>
                                 <div class="product-price">
                                     <span>${{ product.price }} </span>
                                     <span class="old-price">${{ product.old_price }}</span>

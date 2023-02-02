@@ -54,9 +54,9 @@
                                             <div class="product-detail-rating">
                                                 <div class="product-rate-cover text-end">
                                                     <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 90%"></div>
+                                                        <div class="product-rating" style="width: {{ star }}%"></div>
                                                     </div>
-                                                    <span class="font-small ml-5 text-muted"> (32 reviews)</span>
+                                                    <span class="font-small ml-5 text-muted"> ({{ reviews.count }} reviews)</span>
                                                 </div>
                                             </div>
                                             <div class="clearfix product-price-cover">
@@ -125,7 +125,7 @@
                                                 <a class="nav-link" id="Vendor-info-tab" data-bs-toggle="tab" href="#Vendor-info">Vendor</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews (3)</a>
+                                                <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab" href="#Reviews">Reviews ({{ reviews.count }})</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content shop_info_tab entry-main-content">
@@ -148,9 +148,9 @@
                                                         </h6>
                                                         <div class="product-rate-cover text-end">
                                                             <div class="product-rate d-inline-block">
-                                                                <div class="product-rating" style="width: 90%"></div>
+                                                                <div class="product-rating" style="width: {{ r.get_rating }}%"></div>
                                                             </div>
-                                                            <span class="font-small ml-5 text-muted"> (32 reviews)</span>
+                                                            <span class="font-small ml-5 text-muted"> ({{reviews.count}} reviews)</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -183,75 +183,37 @@
                                                         <div class="col-lg-8">
                                                             <h4 class="mb-30">Customer questions & answers</h4>
                                                             <div class="comment-list">
+                                                                {% for r in reviews %}
                                                                 <div class="single-comment justify-content-between d-flex mb-30">
                                                                     <div class="user justify-content-between d-flex">
                                                                         <div class="thumb text-center">
                                                                             <img src="{% static 'assets/imgs/blog/default_user.png' %}" alt="" />
-                                                                            <a href="#" class="font-heading text-brand">Sienna</a>
+                                                                            <br>
+                                                                            <a href="#" class="font-heading text-brand">{{ r.user }}</a>
                                                                         </div>
                                                                         <div class="desc">
                                                                             <div class="d-flex justify-content-between mb-10">
                                                                                 <div class="d-flex align-items-center">
-                                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
+                                                                                    <span class="font-xs text-muted">{{ r.date }}</span>
                                                                                 </div>
                                                                                 <div class="product-rate d-inline-block">
-                                                                                    <div class="product-rating" style="width: 100%"></div>
+                                                                                    <div class="product-rating" style="width: {{ r.get_rating }}%"></div>
                                                                                 </div>
                                                                             </div>
-                                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos
-                                                                                sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
+                                                                            <p class="mb-10">{{ r.review }}<a href="#" class="reply">Reply</a></p>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="single-comment justify-content-between d-flex mb-30 ml-30">
-                                                                    <div class="user justify-content-between d-flex">
-                                                                        <div class="thumb text-center">
-                                                                            <img src="{% static 'assets/imgs/blog/default_user.png' %}" alt="" />
-                                                                            <a href="#" class="font-heading text-brand">Brenna</a>
-                                                                        </div>
-                                                                        <div class="desc">
-                                                                            <div class="d-flex justify-content-between mb-10">
-                                                                                <div class="d-flex align-items-center">
-                                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                                </div>
-                                                                                {% comment %} <div class="product-rate d-inline-block">
-                                                                                    <div class="product-rating" style="width: 80%"></div>
-                                                                                </div> {% endcomment %}
-                                                                            </div>
-                                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos
-                                                                                sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="single-comment justify-content-between d-flex">
-                                                                    <div class="user justify-content-between d-flex">
-                                                                        <div class="thumb text-center">
-                                                                            <img src="{% static 'assets/imgs/blog/default_user.png' %}" alt="" />
-                                                                            <a href="#" class="font-heading text-brand">Gemma</a>
-                                                                        </div>
-                                                                        <div class="desc">
-                                                                            <div class="d-flex justify-content-between mb-10">
-                                                                                <div class="d-flex align-items-center">
-                                                                                    <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                                </div>
-                                                                                <div class="product-rate d-inline-block">
-                                                                                    <div class="product-rating" style="width: 80%"></div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos
-                                                                                sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                                {% endfor %}
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
                                                             <h4 class="mb-30">Customer reviews</h4>
                                                             <div class="d-flex mb-30">
                                                                 <div class="product-rate d-inline-block mr-15">
-                                                                    <div class="product-rating" style="width: 90%"></div>
+                                                                    <div class="product-rating" style="width: {{ star }}%"></div>
                                                                 </div>
-                                                                <h6>4.8 out of 5</h6>
+                                                                <h6>{{ ratings.rating|floatformat }} out of 5</h6>
                                                             </div>
                                                             <div class="progress">
                                                                 <span>5 star</span>
@@ -405,7 +367,7 @@
                                 </ul>
                             </div>
                             <div class="sidebar-widget widget-vendor mb-30 bg-grey-9 box-shadow-none">
-                                <h5 class="section-title style-3 mb-20">Vendor</h5>
+                                <h5 class="section-title style-3 mb-20">Vendor Information</h5>
                                 <div class="vendor-logo d-flex mb-30">
                                     <img src="{{ product.vendor.image.url }}" alt="" />
                                     <div class="vendor-name ml-15">

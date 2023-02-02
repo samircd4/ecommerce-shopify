@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.db.models import Count
+from django.db.models import Count, Avg
 from taggit.models import Tag
 from core.models import Product, Category, Tags, Vendor, CartOrder, CartOrderItems, ProductReview, Address, Wishlist, ProductImage
 
@@ -67,12 +67,18 @@ def product_details(request, pid):
     except:
         address = 'Address not found'
     products = Product.objects.filter(category = product.category).exclude(pid=pid)[:4]
+    reviews = ProductReview.objects.filter(product=product).order_by('-date')
+    ratings = ProductReview.objects.filter(product=product).aggregate(rating=Avg('rating'))
+    star = ratings['rating']*20
     context = {
         'product': product,
         'p_images': p_images,
         'categories': categories,
         'address': address,
         'products': products,
+        'reviews': reviews,
+        'ratings': ratings,
+        'star': star,
     }
     return render(request, 'core/product-details.html', context)
 
